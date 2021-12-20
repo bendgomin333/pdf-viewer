@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { getImageURLFromTarget, recognize } from './model';
-import { BufferContext } from '../../pages/pdf-viewer/ui';
+import { addBufferElem, BufferContext } from 'entities/buffer/model';
 
 type props = {
     targetCanvas: HTMLCanvasElement
@@ -16,7 +16,7 @@ export const Recognizer = () => {
     const [height, setHeight] = useState(1)
 
 
-    const [buffer, setBuffer] = useContext(BufferContext)
+    const bufferCtx = useContext(BufferContext)
 
     useEffect(() => {
         const canvas = document.querySelector<HTMLCanvasElement>(`.react-pdf__Page__canvas`)!
@@ -48,10 +48,7 @@ export const Recognizer = () => {
             isPressed = false
             clearCtx(ctx, width, height)
             try {
-                setBuffer([
-                    ...buffer,
-                    await recognize(getImageURLFromTarget(canvas, { x, y, w: e.offsetX - x, h: e.offsetY - y }))
-                ])
+                addBufferElem(bufferCtx, await recognize(getImageURLFromTarget(canvas, { x, y, w: e.offsetX - x, h: e.offsetY - y })))
             } catch (err) {
                 console.error(err)
             }

@@ -1,12 +1,77 @@
 :root {
-    --buffer-area-width: 300px;
+  --buffer-area-width: 300px;
 }
 
 .bufferArea {
-    color: whitesmoke;
-    min-width: var(--buffer-area-width);
-    max-width: var(--buffer-area-width);
-    background-color: var(--color-dark);
-    padding: 12px;
+  color: whitesmoke;
+  min-width: var(--buffer-area-width);
+  max-width: var(--buffer-area-width);
+  background-color: var(--color-dark);
+  padding: 12px;
+  overflow-y: scroll;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgb(219, 219, 219) var(--color-dark);
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 }
 
+.bufferItem {
+  font-size: 14px;
+  position: relative;
+  color: var(--color-dark);
+  background-color: whitesmoke;
+  margin-bottom: 4px;
+  padding: 4px;
+}
+
+.clearBtn,
+.delBtn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: whitesmoke;
+  color: var(--color-dark);
+  transition: 0.2s;
+}
+
+.clearBtn {
+  width: 100%;
+  height: 25px;
+  &:hover {
+    border: 2px solid rgb(179, 179, 179);
+  }
+  &:active {
+    background-color: rgb(201, 201, 201);
+  }
+  margin-bottom: 8px;
+}
+
+.delBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    background-color: red;
+    transform: rotate(45deg);
+  }
+
+  &::after {    
+    top: 8px;
+    right: 3px;
+    height: 2px;
+    width: 12px;
+  }
+  &::before {
+    top: 3px;
+    right: 8px;
+    height: 12px;
+    width: 2px;
+  }
+  // background-color: red;
+}

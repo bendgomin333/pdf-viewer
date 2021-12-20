@@ -1,15 +1,17 @@
 import { useContext } from 'react'
 import styles from './styles.module.scss'
-import { BufferContext } from '../../pages/pdf-viewer/ui';
+import { BufferItem } from './item';
+import { BufferContext, clearBuffer } from './model';
 
 export const BufferArea = () => {
-    const [buffer, setBuffer] = useContext(BufferContext)
+    const bufferCtx = useContext(BufferContext)
 
-    console.log(buffer)
     return (
         <div className={styles.bufferArea}>
-            BUFFER
-            {buffer}
+            <button className={styles.clearBtn} onClick={() => clearBuffer(bufferCtx)}>Очистить буфер</button>
+            {bufferCtx.buffer.map(elem => {
+                return <BufferItem id={elem.id} />
+            })}
         </div>
     )
 }
