@@ -1,0 +1,10 @@
+.viewer {
+    display: flex;
+    height: calc(100vh - var(--footer-height) - var(--header-height));
+}
+
+.wrapper {
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+}

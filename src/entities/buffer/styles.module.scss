@@ -1,0 +1,12 @@
+:root {
+    --buffer-area-width: 300px;
+}
+
+.bufferArea {
+    color: whitesmoke;
+    min-width: var(--buffer-area-width);
+    max-width: var(--buffer-area-width);
+    background-color: var(--color-dark);
+    padding: 12px;
+}
+
