@@ -12,9 +12,6 @@ export const Layout = ({ children }: props) => {
             <main>
                 {children}
             </main>
-            <footer className={styles.footer}>
-                FOOTER
-            </footer>
         </>
     )
 }

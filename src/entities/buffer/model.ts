@@ -28,7 +28,6 @@ export const delBufferItemById = (ctx: bufferCtx, id: string) => {
     if (index < 0) return
     res.splice(index, 1)
     ctx.setBuffer(res)
-    console.log(res.findIndex(elem => elem.id === id), 1)
 }
 
 export const clearBuffer = (ctx: bufferCtx) => {

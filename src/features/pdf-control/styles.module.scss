@@ -1,0 +1,33 @@
+.pdfControl {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  button {
+    outline: none;
+    border: none;
+    height: 20px;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.prevPageBtn {
+  transform: rotate(180deg);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

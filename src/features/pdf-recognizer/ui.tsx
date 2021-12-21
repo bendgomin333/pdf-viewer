@@ -48,7 +48,10 @@ export const Recognizer = () => {
             isPressed = false
             clearCtx(ctx, width, height)
             try {
-                addBufferElem(bufferCtx, await recognize(getImageURLFromTarget(canvas, { x, y, w: e.offsetX - x, h: e.offsetY - y })))
+                const recognizedText = await recognize(getImageURLFromTarget(canvas, { x, y, w: e.offsetX - x, h: e.offsetY - y }))
+                if (!recognizedText) return
+                addBufferElem(bufferCtx, recognizedText)
+                navigator.clipboard.writeText(recognizedText)
             } catch (err) {
                 console.error(err)
             }
@@ -56,8 +59,6 @@ export const Recognizer = () => {
     })
 
     return (
-        <canvas className={styles.recognizer} width={width} height={height}>
-
-        </canvas>
+        <canvas className={styles.recognizer} width={width} height={height} />
     )
 }

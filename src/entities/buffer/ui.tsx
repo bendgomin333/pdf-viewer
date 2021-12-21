@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import styles from './styles.module.scss'
 import { BufferItem } from './item';
 import { BufferContext, clearBuffer } from './model';
+import copy from '../../static/icons/copy.svg'
 
 export const BufferArea = () => {
     const bufferCtx = useContext(BufferContext)
