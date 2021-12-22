@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { getImageURLFromTarget, recognize } from './model';
-import { addBufferElem, BufferContext } from 'entities/buffer/model';
+import { getImageURLFromTarget, recognize } from '.';
+import { addBufferElem, BufferContext } from 'entities/buffer';
+import { LoaderSpinner } from 'shared/ui/loader-spinner';
 
 type props = {
     targetCanvas: HTMLCanvasElement
@@ -14,6 +15,7 @@ const clearCtx = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
 export const Recognizer = () => {
     const [width, setWidth] = useState(1)
     const [height, setHeight] = useState(1)
+    const [isRecognizing, setRecognizing] = useState(false)
 
 
     const bufferCtx = useContext(BufferContext)
@@ -48,17 +50,29 @@ export const Recognizer = () => {
             isPressed = false
             clearCtx(ctx, width, height)
             try {
+                setRecognizing(true)
                 const recognizedText = await recognize(getImageURLFromTarget(canvas, { x, y, w: e.offsetX - x, h: e.offsetY - y }))
                 if (!recognizedText) return
                 addBufferElem(bufferCtx, recognizedText)
                 navigator.clipboard.writeText(recognizedText)
             } catch (err) {
                 console.error(err)
+            } finally {
+                setRecognizing(false)
             }
         }
     })
 
     return (
-        <canvas className={styles.recognizer} width={width} height={height} />
+        <>
+            <canvas className={styles.recognizer} width={width} height={height} />
+            {isRecognizing ?
+                <div className={styles.preloader}>
+                    <div className={styles.preloaderWrapper}>
+                        <LoaderSpinner />
+                    </div>
+                </div>
+                : null}
+        </>
     )
 }

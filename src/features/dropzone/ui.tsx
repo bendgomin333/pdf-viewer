@@ -1,4 +1,4 @@
-import { DropzoneContext } from 'pages/pdf-viewer/model';
+import { DropzoneContext } from 'pages/pdf-viewer';
 import { useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styles from './styles.module.scss'

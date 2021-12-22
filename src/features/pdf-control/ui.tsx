@@ -1,5 +1,5 @@
-import { DropzoneContext, PdfControlContext } from "pages/pdf-viewer/model"
-import { useContext } from "react"
+import { DropzoneContext, PdfControlContext } from "pages/pdf-viewer"
+import { useContext, useEffect, useRef, useState } from "react"
 import styles from './styles.module.scss'
 import arrow from '../../static/icons/arrow.svg'
 import zoomIn from '../../static/icons/zoom-in.svg'
@@ -8,6 +8,13 @@ import zoomOut from '../../static/icons/zoom-out.svg'
 export const PdfControl = () => {
     const { numPages, pageNumber, scale } = useContext(PdfControlContext)
     const { pdfFile, setPdfFile } = useContext(DropzoneContext)
+    const [inputValue, setInputValue] = useState(`${pageNumber.value}`)
+
+    useEffect(() => {
+        setInputValue(`${pageNumber.value}`)
+    }, [pageNumber.value])
+
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const nextPage = () => {
         console.log(numPages.value)

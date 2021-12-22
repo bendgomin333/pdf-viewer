@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { Document, Page } from 'react-pdf/dist/umd/entry.webpack';
-import { Recognizer } from 'features/pdf-recognizer/ui';
-import { DropzoneContext, PdfControlContext } from 'pages/pdf-viewer/model';
-import { Dropzone } from 'features/dropzone/ui';
+import { Recognizer } from 'features/pdf-recognizer';
+import { DropzoneContext, PdfControlContext } from 'pages/pdf-viewer';
+import { Dropzone } from 'features/dropzone';
 
 
 export const ViewArea = () => {
@@ -16,6 +16,7 @@ export const ViewArea = () => {
 
 
     useEffect(() => {
+        if (!isRendered) return
         if (isLoading) return
 
         const canvas = document.querySelector<HTMLCanvasElement>(`.react-pdf__Page__canvas`)
@@ -35,7 +36,6 @@ export const ViewArea = () => {
             page.style.overflowX = 'hidden'
         }
 
-        if (!isRendered) return
     }, [isLoading, scale, isRendered])
 
     const onDocumentLoadSuccess = (payload: any) => {

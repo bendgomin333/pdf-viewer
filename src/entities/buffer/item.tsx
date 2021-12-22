@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { BufferContext, delBufferItemById } from "./model";
 import styles from "./styles.module.scss";
 import copy from '../../static/icons/copy.svg'
+import { BufferContext, delBufferItemById } from ".";
 
 export const BufferItem = ({ id }: { id: string }) => {
     const ctx = useContext(BufferContext)
