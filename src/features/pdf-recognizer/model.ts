@@ -11,7 +11,7 @@ export const getImageURLFromTarget = (canvas: HTMLCanvasElement, { x, y, w, h, q
 }
 
 export const recognize = async (img: string) => {
-    const data = await fetch('/recognize', {
+    const data = await fetch('https://pdf-recognize.herokuapp.com/recognize', {
         method: 'POST', body: JSON.stringify(img), headers: {
             'Content-Type': 'application/json'
         }
